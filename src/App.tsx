@@ -1,4 +1,4 @@
-import PetTypeList from "./componenets/PetTypeList.tsx"
+
 import ShowList from "./componenets/ShowList"
 
 

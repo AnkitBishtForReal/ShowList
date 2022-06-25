@@ -1,11 +1,12 @@
 import { AnyAction, createStore, applyMiddleware } from "redux";
 import { SHOWS_FETCHED } from "./actions";
+import { Show } from "./componenets/models/Show";
 import sagaMiddleware, { rootSaga } from "./sagas";
 
 
 
 export type State = {
-    shows: show[];
+    shows: Show[];
 };
 
 const initialState: State = {
