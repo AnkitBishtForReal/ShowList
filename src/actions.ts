@@ -4,11 +4,12 @@ export const SHOWS_FETCH = 'shows fetch';
 export const SHOWS_FETCHED = "shows fetched";
 
 
-export const showsFetchAction = () => ({
-    type: SHOWS_FETCH
+export const showsFetchAction = (querry: string) => ({
+    type: SHOWS_FETCH,
+    payload: querry
 })
 
-export const showsFetchedAction = (shows: Show[]) => ({
+export const showsFetchedAction = (querry: string, shows: Show[]) => ({
     type: SHOWS_FETCHED,
-    payload: shows
+    payload: { querry, shows }
 })
