@@ -8,10 +8,6 @@ const sagaMiddleware = createSagaMiddleware()
 
 export function* fetchShowsaga(action: AnyAction): Generator<any, any, any> {
     console.log("action", action)
-    yield delay(100);
-    if (!action.payload) {
-        return;
-    }
 
 
     const querry = action.payload

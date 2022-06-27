@@ -12,12 +12,13 @@ type ShowListProps = {
 }
 const ShowList: FC<ShowListProps> = ({ shows, fetchshows, querry }) => {
 
-
+    console.log("shows", shows)
+    console.log("querry", querry)
 
     return <div className="p-5">
         <div className=" justify-center  flex h-9">
-            <h1 className=" bg-yellow-200 text-red-500 font-mono text-lg">POWERED BY ANKIT BISHT </h1>
-            <img src="https://cdn2.vectorstock.com/i/thumb-large/32/36/logo-ab-icon-sign-two-interlaced-letters-a-b-vector-28163236.jpg" />
+
+
         </div>
         <input className="rounded-md border border-red-400" value={querry} onChange={(event) => {
             fetchshows(event.target.value);
