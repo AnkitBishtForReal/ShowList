@@ -1,7 +1,7 @@
 import { FC, memo, useEffect } from "react";
 import { connect } from "react-redux";
 import { showsFetchAction } from "../actions";
-import { showsQuerySelector, showsSelector } from "../selectors";
+import { showQuerrySelector, showsSelector } from "../selectors";
 import ShowRow from "../ShowRow";
 import { State } from "../store";
 import { Show } from "./models/Show";
@@ -9,11 +9,13 @@ type ShowListProps = {
     querry: string;
     shows: Show[];
     fetchshows: (querry: string) => void;
+
 }
 const ShowList: FC<ShowListProps> = ({ shows, fetchshows, querry }) => {
 
     console.log("shows", shows)
     console.log("querry", querry)
+
 
     return <div className="p-5">
         <div className=" justify-center  flex h-9">
@@ -38,7 +40,7 @@ ShowList.defaultProps = {
 
 const mapStateToProps = (s: State) => ({
     shows: showsSelector(s),
-    querry: showsQuerySelector(s)
+    querry: showQuerrySelector(s)
 })
 
 const mapdispatchtoProps = {

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { Show } from "./componenets/models/Show";
 type ShowRowProps = {
 
@@ -6,7 +7,9 @@ type ShowRowProps = {
 }
 const ShowRow: FC<ShowRowProps> = ({ show }) => {
     console.log("show", { show })
-    return <div className="flex items-stretch rounded-md p-2 bg-gray-700">
+    const navigate = useNavigate();
+    const handleClick = () => navigate("/shows/" + show.id)
+    return <div onClick={handleClick} className="cursor-pointer flex items-stretch rounded-md p-2 bg-gray-700">
 
         <div className="w-20 shrink-0">
             <img src={show.image?.medium ||

@@ -1,16 +1,29 @@
+
+import { createSelector } from "reselect";
 import { State } from "./store";
 
 
-export const showsSelector = (s: State) => {
-    console.log("state", s)
-    const showsIds = s.showsAgainstQuerry[s.showsQuerry] || [];
-    const shows2 = showsIds.map((id) => s.shows[id]);
-    console.log("shows 2", showsIds)
-    return shows2
-}
-export const showsQuerySelector = (s: State) => {
 
-    const show = s.showsQuerry
-    console.log("showsQuery", show)
-    return show
-}
+const showStateSelector = (s: State) => s.shows;
+
+
+
+export const showQuerrySelector = createSelector(showStateSelector, (
+    showState) => showState.querry);
+
+const showsAgainstQuerrySelector = createSelector(showStateSelector, (showState) => showState.againstQuerry);
+
+export const showsEntitiesSelector = createSelector(showStateSelector, (showState) => showState.entities);
+
+
+
+
+
+export const showIdsSelector =
+    createSelector(showQuerrySelector, showsAgainstQuerrySelector,
+        (querry, againstQuerry) => againstQuerry[querry] || []);
+
+
+
+export const showsSelector =
+    createSelector(showIdsSelector, showsEntitiesSelector, (ids, entities) => ids.map((id) => entities[id]));
