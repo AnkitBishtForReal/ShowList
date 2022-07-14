@@ -18,6 +18,7 @@ const ShowList: FC<ShowListProps> = ({ shows, fetchshows, querry }) => {
 
 
     return <div className="p-5">
+
         <div className=" justify-center  flex h-9">
 
 
@@ -25,9 +26,11 @@ const ShowList: FC<ShowListProps> = ({ shows, fetchshows, querry }) => {
         <input className="rounded-md border border-red-400" value={querry} onChange={(event) => {
             fetchshows(event.target.value);
         }} placeholder="search" />
+        
         <div className="space-y-3 mt-2" >
+           
             {shows.map((s) => (
-                <ShowRow show={s} key={s.id} />
+                <ShowRow querry={querry} show={s} key={s.id} />
 
             ))}
         </div>

@@ -1,14 +1,17 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Show } from "./componenets/models/Show";
 type ShowRowProps = {
-
+querry:string;
     show: Show
 }
-const ShowRow: FC<ShowRowProps> = ({ show }) => {
+const ShowRow: FC<ShowRowProps> = ({ show ,querry}) => {
+    
+                    
+              
     console.log("show", { show })
     const navigate = useNavigate();
-    const handleClick = () => navigate("/shows/" + show.id)
+    const handleClick = () => navigate(`/shows/${show.id}?q=${querry}`);
     return <div onClick={handleClick} className="cursor-pointer flex items-stretch rounded-md p-2 bg-gray-700">
 
         <div className="w-20 shrink-0">

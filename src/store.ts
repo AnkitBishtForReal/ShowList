@@ -5,13 +5,14 @@ import { createStore, applyMiddleware } from "redux";
 import sagaMiddleware, { rootSaga } from "./sagas";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { showReducer } from "./reducers/shows";
-
+import { actorReducer } from "./reducers/actors";
 
 
 
 
 export const reducer = combineReducers({
-    shows: showReducer
+    shows: showReducer,
+    actors:actorReducer
 }
 )
 const store = createStore(reducer,
