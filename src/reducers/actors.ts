@@ -6,6 +6,7 @@ import { Actor } from "../componenets/models/Actor";
 
 type ActorState = {
     entities:{[id:number]:Actor}
+    
 }
 
 const initialActorState = {

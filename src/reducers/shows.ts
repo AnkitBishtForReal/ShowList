@@ -9,8 +9,10 @@ export type ShowState = {
     againstQuerry: { [q: string]: number[] };
     querry: string;
     showLoading:{[showId:number]:boolean};
-    actorsLoading:{[showId:number]:boolean}
+    actorsLoading:{[showId:number]:boolean};
   actors:{[showId:number]:number[];}
+  showsLoading:boolean
+
 }
 
 
@@ -21,6 +23,8 @@ export const initialShowState: ShowState = {
     showLoading:{},
     actorsLoading:{},
     actors:{},
+    showsLoading:false
+    
     
 
 };
@@ -33,7 +37,8 @@ export const showReducer: Reducer<ShowState> = (state = initialShowState, action
           
             return {
                 ...state,
-                showLoading:{[action.payload]:true}
+                showLoading:{[action.payload]:true},
+                actorsLoading:{[action.payload]:true}
             }
 
         case SHOW_FETCHED:
@@ -47,7 +52,8 @@ export const showReducer: Reducer<ShowState> = (state = initialShowState, action
             }
         case SHOWS_FETCH:
             console.log("ghsdhgh",action.payload)
-            return { ...state, querry: action.payload };
+            return { ...state, querry: action.payload ,showsLoading:true}
+            ;
 
         case SHOWS_FETCHED:
 
@@ -60,7 +66,8 @@ export const showReducer: Reducer<ShowState> = (state = initialShowState, action
             const ids = shows.map((s) => s.id);
             
 
-            return { ...state, entities: { ...state.entities, ...normalizedShows }, againstQuerry: { ...state.againstQuerry,[querry]: ids } };
+            return { ...state, entities: { ...state.entities, ...normalizedShows },
+             againstQuerry: { ...state.againstQuerry,[querry]: ids } ,showsLoading:false};
 
 case SHOW_CAST_FETCHED:
     const {showId,actor}=action.payload as{
@@ -70,7 +77,8 @@ case SHOW_CAST_FETCHED:
     console.log("actorIds",actorIds)
     return{
         ...state,
-        actors:{...state.actors,[showId]:actorIds}
+        actors:{...state.actors,[showId]:actorIds},
+        actorsLoading:{[showId]:false}
     }
 
 

@@ -6,7 +6,7 @@ import { showCastFetchAction, showFetchAction, showFetchedAction, showsFetchActi
 
 import { withRouter, WithRouterProps } from "../hocs/withRouter";
 import { fetchShowCast } from "../sagas";
-import { actorStateSelector, showActorSelector, showLoadingSelector, showsEntitiesSelector, showsSelector, showStateSelector } from "../selectors";
+import { actorLoadingSelector, actorStateSelector, showActorSelector, showLoadingSelector, showsEntitiesSelector, showsSelector, showStateSelector } from "../selectors";
 import { State } from "../store";
 import { LinkWithQuery } from "./LinkWithQuery";
 import Actor from "./models/Actor";
@@ -25,7 +25,7 @@ type ShowDetailsProps = {
     next?:string,
     fetchShows:(querry:string)=>void;
 } & WithRouterProps;
-const ShowDetails: FC<ShowDetailsProps> = ({ params, show, fetchShow,loading,fetchShowCast ,actors,prev,next,fetchShows,search}) => {
+const ShowDetails: FC<ShowDetailsProps> = ({ params, show, fetchShow,loading,fetchShowCast ,actors,prev,next,fetchShows,search,actorsLoading}) => {
     console.log("id", +params.id)
   
   
@@ -81,10 +81,10 @@ fetchShows(querry);
             <div>
                 Actors:
             </div>
-
+{actorsLoading && <Spinner/>}
        {actors && (<div>
-                {actors.map((a)=><div className="flex justify-center "><div><h2>{a.name}</h2></div>
-                {/* <div><img src={a.image.medium}/></div> */}
+                {actors.map((a)=><div className="flex w-32 "><div><h2>{a.name}</h2></div>
+                <div className="p-2 "><img src={a.image.medium}/></div>
                 </div>)}
             </div>)}
             <div className="flex justify-around" >
@@ -133,7 +133,8 @@ break;
 loading:showLoadingSelector(s)[showId],
 actors:showActorSelector(s)[showId],
 prev:prevShow&&`/shows/${prevShow.id}`,
-next:nextShow&&`/shows/${nextShow.id}`
+next:nextShow&&`/shows/${nextShow.id}`,
+actorsLoading:actorLoadingSelector(s)[showId]
 
 }};
 
