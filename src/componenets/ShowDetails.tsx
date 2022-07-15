@@ -41,7 +41,7 @@ fetchShows(querry);
  fetchShow(showId);
  fetchShowCast(showId)
             
-        }, [params.showId])
+        }, [params,show.id])
 
 
           
